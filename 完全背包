@@ -1,0 +1,63 @@
+/*
+
+f[i] 总体积为i时，最大价值是多少
+
+result = max{f[0 ... m]}
+
+for (int i = 0; i < n; i ++ )
+{
+    // 从小到大枚举，就变成包含了若干个第i个物品了
+    for (int j = v[i]; j <= m; j ++ )
+        f[j] = max(f[j], f[j-v[i]] + w[i]);
+        
+    
+    for (int j = m; j >= v[i]; j -- )]
+        for(int k = 0; k * v[i] <=j; k++ )
+            f[j] = max(f[j], f[j-k*v[i]] + k * w[i]);
+}
+
+数学归纳法：
+1. 假设考虑前i-1个物品之后，所有的f[j]都是正确的
+2. 证明：考虑完第i个物品后，所有的f[j]也都是正确的
+
+对于某个j而言，如果最优解中包含k个v[i]
+f[j-k*v[i]];
+
+f[j-(k-1)*v[i]] 包含1个v[i]
+
+...
+
+
+*/
+```
+
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1010;
+
+int n, m;
+int f[N];
+
+int main()
+{
+    cin >> n >> m;
+    for(int i = 0; i < n; i ++ )
+    {
+        int v,w;
+        cin >> v >> w;
+        for(int j = v; j <= m; j++)
+            // for(int k = 0; k * v <=j; k++ )
+            //     f[j] = max(f[j], f[j-k*v] + k * w);
+            f[j] = max(f[j], f[j-v] + w);
+    }
+    
+    cout << f[m] <<endl;
+    return 0;
+}
+
+```
+
